@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
-function App() {
+export default function App() {
+  const [counter,setCounter] = useState(0);
+
+  //<-- handling add , sub, double, reset button -->
+  const handleChange = (value) =>{
+    setCounter(counter + value)
+  }
+
+  const resetCounter = () =>{
+    setCounter(0);
+  }
+
+  const handleDouble = () =>{
+    setCounter(counter * 2);
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <h3 className={ counter % 2 === 0 ? "green"  : "red"}> Counter : {counter} </h3>
+
+      {/* add button  */}
+      <button onClick ={() => handleChange(1)} >increment</button>
+      
+      {/* sub button  */}
+      <button onClick ={() => handleChange(counter > 0 ? -1 : 0)} >decrement</button>
+
+      {/* double button  */}
+      <button onClick ={handleDouble} >Double</button>
+
+      {/* reset button  */}
+      <button onClick ={resetCounter} >reset</button>
+
+      {/* <-- div for showing wheater counter is even or odd --> */}
+      <div >Number is { counter % 2 === 0 ? "Even" : "Odd" }  </div>
+
+
     </div>
   );
 }
-
-export default App;
